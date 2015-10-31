@@ -1,0 +1,46 @@
+@(form: Form[_])
+
+@main("Login") {
+
+    <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                @if(form.hasErrors){
+                    <div class="alert alert-info">
+                        <a class="close" data-dismiss="alert" href="#">×</a>
+                        @form.errors.map {
+                            case (chave, valor) => {
+                                @for(err <- valor){
+                                    <div class="text-left">@err.message.toString <br/></div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+
+                <div class="modal-header">
+                    <h1 class="text-center">Autenticação</h1>
+                </div>
+                <div class="modal-body">
+                    <form id="formLogin" action="@routes.LoginController.logar()" method="POST" class="form col-md-12 center-block">
+                        <div class="form-group">
+                            <input type="text" id="login" name="login" value="@form.apply("login").value" class="form-control input-lg" placeholder="login">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="senha" name="senha" value="@form.apply("senha").value" class="form-control input-lg" placeholder="senha">
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Acessar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
