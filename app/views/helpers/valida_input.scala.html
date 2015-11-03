@@ -1,0 +1,6 @@
+@(form: Form[_], fieldName: String, inputType: String, inputClass: String)
+
+<div class="form-group @if(form(fieldName).hasErrors) {has-error}">
+  <input type="@inputType" id="@fieldName" name="@fieldName" value="@form.apply(fieldName).value" class="@inputClass" />
+  <span class="help-block">@{form(fieldName).error.map{ error => error.message }}</span>
+</div>
